@@ -10,7 +10,7 @@ import {
 import bg from "../assets/bg.png";
 // import logo from "../assets/logo.png";
 import logo from "../assets/drawable-mdpi/logo.png";
-import Button from "../components/button/Button.components";
+import Button from "../components/button/pryButton/Button";
 
 const Splash = () => {
     return (
