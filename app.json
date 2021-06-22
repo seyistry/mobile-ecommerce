@@ -1,0 +1,12 @@
+{
+  "name": "mobile-ecommerce",
+  "displayName": "mobile-ecommerce",
+  "expo": {
+    "name": "mobile-ecommerce",
+    "slug": "mobile-ecommerce",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
