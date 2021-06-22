@@ -1,11 +1,29 @@
-import { StatusBar } from 'expo-status-bar';
+// import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import Constants from "expo-constants";
+import { StyleSheet, Text, View, SafeAreaView, StatusBar } from 'react-native';
+import Splash from './screens/Splash'
+
+function StoreStatusBar({ backgroundColor, ...props }) {
+  return (
+      <SafeAreaView
+          style={{ backgroundColor, height: Constants.statusBarHeight }}
+      >
+          <StatusBar
+              translucent
+              backgroundColor={backgroundColor}
+              {...props}
+          />
+      </SafeAreaView>
+  );
+}
+
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+      <StoreStatusBar backgroundColor={'#FF3B5A'} style="light"/>
+      <Splash />
       <StatusBar style="auto" />
     </View>
   );
@@ -14,8 +32,5 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });
