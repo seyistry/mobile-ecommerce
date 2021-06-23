@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import bg from "../assets/bg.png";
 // import logo from "../assets/logo.png";
-import logo from "../assets/drawable-mdpi/logo.png";
+import logo from "../assets/drawable-hdpi/logo.png";
 import Button from "../components/button/pryButton/Button";
 
 const Splash = () => {

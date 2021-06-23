@@ -3,6 +3,7 @@ import React from 'react';
 import Constants from "expo-constants";
 import { StyleSheet, Text, View, SafeAreaView, StatusBar } from 'react-native';
 import Splash from './screens/Splash'
+import Login from './screens/Login'
 
 function StoreStatusBar({ backgroundColor, ...props }) {
   return (
@@ -23,7 +24,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <StoreStatusBar backgroundColor={'#FF3B5A'} style="light"/>
-      <Splash />
+      <Login />
       <StatusBar style="auto" />
     </View>
   );
