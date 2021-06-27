@@ -18,4 +18,6 @@ target 'mobileecommerce' do
   #     flipper_post_install(installer)
   #   end
   # end
+  pod 'RNColorMatrixImageFilters', :path => '../node_modules/react-native-color-matrix-image-filters'
+
 end
