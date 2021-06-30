@@ -19,14 +19,18 @@ import HeaderWithHr from "../components/header/HeaderWithHr";
 const Login = () => {
     return (
         <ImageBackground source={bg} style={styles.bg}>
-            <ScrollView contentContainerStyle={{ alignItems: "center" }}>
+            <ScrollView
+                contentContainerStyle={{ alignItems: "center", flex: 1 }}
+            >
                 <View style={styles.logo}>
                     <Image source={logo} />
                 </View>
                 <View style={styles.signIn}>
                     <HeaderWithHr name={"Sign in"} />
-                    <FormInput name={"User Name"} />
+                    <FormInput name={"User Name"}/>
+                    <View style={{marginBottom: 10}}/>
                     <FormInput name={"Password"} />
+                    <View style={{marginBottom: 20}}/>
                     <Button name={"Sign In"} />
                     <Text style={[styles.text, { color: "#626E89" }]}>
                         Forgot Password?
@@ -47,20 +51,17 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     logo: {
-        // height: 300,
-        // width: 300,a
-        alignItems: "center",
         marginTop: 60,
         marginBottom: 90,
     },
     signIn: {
-        width: 393,
-        height: 513,
+        width: "100%",
+        height: "100%",
         backgroundColor: "white",
         alignItems: "center",
-        justifyContent: 'center',
         borderTopRightRadius: 20,
         borderTopLeftRadius: 20,
+        paddingHorizontal: 10,
     },
     text: {
         margin: 20,

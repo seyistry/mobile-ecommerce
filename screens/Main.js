@@ -16,6 +16,11 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import Home from "./Home";
 import { LinearGradient } from "expo-linear-gradient";
+import Product from "./Product";
+import Login from "./Login";
+import Cart from "./Cart";
+import Checkouts from "./Checkouts";
+import OrderSuccessMsg from "./OrderSuccessMsg";
 
 const Main = () => {
     const Tab = createBottomTabNavigator();
@@ -109,9 +114,9 @@ const Main = () => {
                     }
                     initialRouteName="Home"
                 >
-                    <Tab.Screen name="Box" component={Home} />
+                    <Tab.Screen name="Box" component={Login} />
                     <Tab.Screen name="Home" component={Home} />
-                    <Tab.Screen name="Profile" component={Home} />
+                    <Tab.Screen name="Profile" component={OrderSuccessMsg} />
                 </Tab.Navigator>
             </LinearGradient>
         );
@@ -127,6 +132,11 @@ const Main = () => {
                         name="Home"
                         component={Tabs}
                         options={{ headerShown: false }}
+                    />
+                    <Stack.Screen
+                        name="Your Cart"
+                        component={Tabs}
+                        // options={{ headerShown: false }}
                     />
                 </Stack.Navigator>
             </NavigationContainer>

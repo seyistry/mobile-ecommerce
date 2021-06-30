@@ -2,13 +2,12 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
     inputContainer: {
-        width: "90%",
+        width: "100%",
         height: 82,
         backgroundColor: "#FAFAFC",
         borderWidth: 1,
         borderColor: "#E2E9F8",
         justifyContent: "center",
-        marginBottom: 20,
     },
     text: {
         fontSize: 16,

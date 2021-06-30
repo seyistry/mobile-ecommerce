@@ -1,7 +1,7 @@
 import React from "react";
 import { Text, View, Image } from "react-native";
 import styles from "./styles.js";
-import product from "../../assets/drawable-hdpi/product.png";
+import product from "../../../assets/drawable-hdpi/product.png";
 import { Ionicons } from "@expo/vector-icons";
 
 const Card = (props) => (

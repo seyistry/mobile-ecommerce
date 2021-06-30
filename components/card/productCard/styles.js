@@ -4,8 +4,8 @@ const styles = StyleSheet.create({
     cardContainer: {
         width: 164,
         height: 222,
-        marginVertical: 10,
-        marginLeft: 10,
+        // marginVertical: 10,
+        // marginLeft: 10,
         borderRadius: 10,
         borderWidth: 2,
         borderColor: "#FBFBFB",

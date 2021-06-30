@@ -11,7 +11,7 @@ import {
     TextInput,
 } from "react-native";
 import { Ionicons, AntDesign } from "@expo/vector-icons";
-import Card from "../components/card/Card";
+import Card from "../components/card/productCard/Card";
 import { LinearGradient } from "expo-linear-gradient";
 
 const Home = () => {
@@ -19,7 +19,7 @@ const Home = () => {
         <LinearGradient
             colors={["#FF5B55", "#FF1161", "#FF5B55"]}
             start={{ x: 0, y: 1 }}
-                end={{ x: 1, y: 0 }}
+            end={{ x: 1, y: 0 }}
             style={{ flex: 1 }}
         >
             <View
@@ -52,74 +52,74 @@ const Home = () => {
                         />
                     </View>
                 </View>
-                <View
-                    style={{
-                        height: 40,
-                        marginVertical: 10,
-                        flexDirection: "row",
-                    }}
-                >
+                <View style={{ marginHorizontal: 10 }}>
                     <View
-                        style={[
-                            styles.searchFilter,
-                            {
-                                width: "75%",
-                                marginLeft: 10,
-                                paddingLeft: 10,
-                                flex: 1,
-                                flexDirection: "row",
-                                alignItems: "center",
-                            },
-                        ]}
+                        style={{
+                            height: 40,
+                            marginVertical: 10,
+                            flexDirection: "row",
+                        }}
                     >
-                        <Ionicons
-                            name="search-outline"
-                            size={24}
-                            color="black"
-                        />
-                        <TextInput
-                            style={{ paddingLeft: 10, width: "80%" }}
-                            placeholder="Search"
-                        />
+                        <View
+                            style={[
+                                styles.searchFilter,
+                                {
+                                    paddingLeft: 10,
+                                    flex: 1,
+                                    flexDirection: "row",
+                                    alignItems: "center",
+                                },
+                            ]}
+                        >
+                            <Ionicons
+                                name="search-outline"
+                                size={24}
+                                color="black"
+                            />
+                            <TextInput
+                                style={{ paddingLeft: 10, width: "80%" }}
+                                placeholder="Search"
+                            />
+                        </View>
+                        <View
+                            style={[
+                                styles.searchFilter,
+                                {
+                                    width: 40,
+                                    marginLeft: 10,
+                                    // marginRight: 10,
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                },
+                            ]}
+                        >
+                            <AntDesign name="filter" size={20} color="black" />
+                        </View>
                     </View>
-                    <View
-                        style={[
-                            styles.searchFilter,
-                            {
-                                width: 40,
-                                marginLeft: 10,
-                                marginRight: 10,
-                                alignItems: "center",
-                                justifyContent: "center",
-                            },
-                        ]}
-                    >
-                        <AntDesign name="filter" size={20} color="black" />
+                    <View style={styles.title}>
+                        <Text style={styles.text}>Trending products</Text>
+                        <View style={styles.hr} />
+                        <Text style={{ color: "#FF5B55" }}>See All</Text>
                     </View>
-                </View>
-                <View style={styles.title}>
-                    <Text style={styles.text}>Trending products</Text>
-                    <View style={styles.hr} />
-                    <Text style={{ color: "#FF5B55" }}>See All</Text>
-                </View>
-                <View style={styles.row}>
-                    <Card />
-                </View>
-                <View style={styles.title}>
-                    <Text style={styles.text}>popular categories</Text>
-                    <View style={styles.hr} />
-                    <Text style={{ color: "#FF5B55" }}>See All</Text>
-                </View>
-                <View style={styles.row}>
-                    <View style={styles.categoriesText}>
-                        <Text>All</Text>
+                    <View style={[styles.row, { marginVertical: 10 }]}>
+                        <Card />
                     </View>
-                    <View style={styles.categoriesText}>
-                        <Text>Electronics And Appliances</Text>
+                    <View style={styles.title}>
+                        <Text style={styles.text}>popular categories</Text>
+                        <View style={styles.hr} />
+                        <Text style={{ color: "#FF5B55" }}>See All</Text>
                     </View>
-                </View>
-                <View style={styles.row}>
-                    <Card />
+                    <View style={styles.row}>
+                        <View style={styles.categoriesText}>
+                            <Text>All</Text>
+                        </View>
+                        <View style={styles.categoriesText}>
+                            <Text>Electronics And Appliances</Text>
+                        </View>
+                    </View>
+                    <View style={[styles.row, { marginVertical: 10 }]}>
+                        <Card />
+                    </View>
                 </View>
             </View>
         </LinearGradient>
@@ -142,7 +142,6 @@ const styles = StyleSheet.create({
     searchFilter: {
         backgroundColor: "#F7F7F8",
         borderRadius: 4,
-        // justifyContent: "center",
     },
     hr: {
         flex: 1,
@@ -155,7 +154,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-between",
-        marginHorizontal: 10,
+
     },
     text: {
         textTransform: "uppercase",
@@ -166,7 +165,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
     },
     categoriesText: {
-        marginLeft: 10,
+        marginRight: 10,
         paddingVertical: 10,
         paddingHorizontal: 20,
         backgroundColor: "#F7F7F8",
