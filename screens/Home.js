@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
     StyleSheet,
     Text,
@@ -13,8 +13,58 @@ import {
 import { Ionicons, AntDesign } from "@expo/vector-icons";
 import Card from "../components/card/productCard/Card";
 import { LinearGradient } from "expo-linear-gradient";
+import * as ProductApi from "../utils/api";
+import AppLoading from "expo-app-loading";
+
+const getRandomInt = () => {
+    return Math.floor(Math.random() * (19 - 0) + 1);
+};
+
+const fiveRandom = () => {
+    let arr = [];
+    while (arr.length < 5) {
+        const random = getRandomInt();
+        if (!arr.includes(random)) {
+            arr.push(random);
+        }
+    }
+    return arr;
+};
+
+const arr = fiveRandom();
 
 const Home = () => {
+    const [ready, setReady] = useState(false);
+    const [products, setProducts] = useState([]);
+    const [categories, SetCategories] = useState([]);
+    
+    useEffect(() => {
+        try {
+            fetch("https://fakestoreapi.com/products")
+                .then((res) => res.json())
+                .then((data) => setProducts(data));
+        } catch (e) {
+            console.log(e);
+        }
+        try {
+            fetch("https://fakestoreapi.com/products/categories")
+                .then((res) => res.json())
+                .then((data) => SetCategories(data));
+        } catch (e) {
+            console.log(e);
+        }
+    }, []);
+
+    if (!ready) {
+        return (
+            <AppLoading
+                startAsync={ProductApi.getProducts}
+                onFinish={() => setReady(true)}
+                onError={console.warn}
+            />
+        );
+    }
+
     return (
         <LinearGradient
             colors={["#FF5B55", "#FF1161", "#FF5B55"]}
@@ -101,25 +151,51 @@ const Home = () => {
                         <View style={styles.hr} />
                         <Text style={{ color: "#FF5B55" }}>See All</Text>
                     </View>
-                    <View style={[styles.row, { marginVertical: 10 }]}>
-                        <Card />
-                    </View>
+                    <ScrollView
+                        horizontal
+                        showsHorizontalScrollIndicator={false}
+                        contentContainerStyle={[{ marginVertical: 10 }]}
+                    >
+                        {arr.map((arr) => {
+                            const product = products[arr];
+                            return (
+                                <View key={arr} style={{ marginRight: 10 }}>
+                                    <Card {...product} />
+                                </View>
+                            );
+                        })}
+                    </ScrollView>
                     <View style={styles.title}>
                         <Text style={styles.text}>popular categories</Text>
                         <View style={styles.hr} />
                         <Text style={{ color: "#FF5B55" }}>See All</Text>
                     </View>
-                    <View style={styles.row}>
+                    <ScrollView
+                        horizontal
+                        showsHorizontalScrollIndicator={false}
+                    >
                         <View style={styles.categoriesText}>
                             <Text>All</Text>
                         </View>
-                        <View style={styles.categoriesText}>
-                            <Text>Electronics And Appliances</Text>
-                        </View>
-                    </View>
-                    <View style={[styles.row, { marginVertical: 10 }]}>
-                        <Card />
-                    </View>
+                        {categories.map((category) => (
+                            <View key={category} style={styles.categoriesText}>
+                                <Text style={{ textTransform: "capitalize" }}>
+                                    {category}
+                                </Text>
+                            </View>
+                        ))}
+                    </ScrollView>
+                    <ScrollView
+                        horizontal
+                        showsHorizontalScrollIndicator={false}
+                        contentContainerStyle={[{ marginVertical: 10 }]}
+                    >
+                        {products.map((product) => (
+                            <View key={product.id} style={{ marginRight: 10 }}>
+                                <Card {...product} />
+                            </View>
+                        ))}
+                    </ScrollView>
                 </View>
             </View>
         </LinearGradient>
@@ -154,7 +230,6 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-between",
-
     },
     text: {
         textTransform: "uppercase",

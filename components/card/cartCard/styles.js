@@ -2,20 +2,22 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
     cardContainer: {
-        flexDirection: 'row',  
-        alignItems: 'center'
+        flexDirection: "row",
+        alignItems: "center",
     },
     imgContainer: {
         maxWidth: 131,
         maxHeight: 108,
         borderRadius: 5,
-        backgroundColor:'#F2F2F2',
+        backgroundColor: "#F2F2F2",
     },
     img: {
-        resizeMode: "contain",
+        width: 131,
+        height: 108,
+        // resizeMode: "contain",
     },
     productName: {
-        fontSize:18,
+        fontSize: 18,
     },
     price: {
         fontSize: 14,
@@ -23,11 +25,9 @@ const styles = StyleSheet.create({
     },
     QuantityContainer: {
         paddingTop: 10,
-        flexDirection: 'row',
+        flexDirection: "row",
     },
-    text: {
-        
-    },
+    text: {},
 });
 
 export default styles;
