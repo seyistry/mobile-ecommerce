@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
     StyleSheet,
     Text,
@@ -9,19 +9,27 @@ import {
     Animated,
     SafeAreaView,
 } from "react-native";
+import { connect } from "react-redux";
 import { AntDesign, Ionicons } from "@expo/vector-icons";
 import product from "../assets/drawable-hdpi/product.png";
 import { LinearGradient } from "expo-linear-gradient";
 import Card from "../components/card/cartCard/Card.js";
 import Button from "../components/button/secButton/Button";
 
-const Product = () => {
+const Product = (props) => {
+    // const  [total, setTotal ] = useState(0);
     return (
         <View style={styles.container}>
-            <Card />
+            <ScrollView showsVerticalScrollIndicator={true}>
+                {props.itemsIds.map((id) => {
+                    return <Card key={id} {...props.items[id]} />;
+                })}
+            </ScrollView>
             <View style={{ alignItems: "center" }}>
-                <Text style={{ color: "#8B98B4" }}>TOTAL AMOUNT</Text>
-                <Text style={{ fontSize: 26, marginTop: 5 }}>$1700.00</Text>
+                <Text style={{ fontSize: 17, color: "#8B98B4", marginTop: 10 }}>
+                    TOTAL AMOUNT
+                </Text>
+                <Text style={{ fontSize: 26, marginTop: 5 }}>${props.total.toFixed(2)}</Text>
                 <LinearGradient
                     // Button Linear Gradient
                     colors={["#FF5B55", "#FF5B55", "#FF1161"]}
@@ -37,12 +45,32 @@ const Product = () => {
     );
 };
 
+function mapStateToProps(state) {
+    const items = state;
+    const itemsIds = Object.keys(items).sort(
+        (a, b) => items[a].timestamp - items[b].timestamp
+    );
+
+    let addItems = itemsIds.map(
+        (id) => items[id].price * items[id].quantity
+    );
+
+    let total = addItems.reduce((a, b) => a + b, 0)
+
+    console.log(total)
+    return {
+        items,
+        itemsIds,
+        total,
+    };
+}
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 10,
         backgroundColor: "white",
-        justifyContent: "space-between",
+        // justifyContent: "space-between",
     },
     buttonContainer: {
         marginVertical: 30,
@@ -57,8 +85,8 @@ const styles = StyleSheet.create({
         color: "white",
         fontWeight: "bold",
         paddingRight: 10,
-        textTransform: 'uppercase',
+        textTransform: "uppercase",
     },
 });
 
-export default Product;
+export default connect(mapStateToProps)(Product);

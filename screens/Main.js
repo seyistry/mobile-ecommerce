@@ -116,7 +116,7 @@ const Main = () => {
                 >
                     <Tab.Screen name="Box" component={Login} />
                     <Tab.Screen name="Home" component={Home} />
-                    <Tab.Screen name="Profile" component={OrderSuccessMsg} />
+                    <Tab.Screen name="Profile" component={Cart} />
                 </Tab.Navigator>
             </LinearGradient>
         );
@@ -134,9 +134,17 @@ const Main = () => {
                         options={{ headerShown: false }}
                     />
                     <Stack.Screen
+                        name="Product"
+                        component={Product}
+                        options={{ headerShown: false }}
+                    />
+                    <Stack.Screen
                         name="Your Cart"
-                        component={Tabs}
-                        // options={{ headerShown: false }}
+                        component={Cart}
+                        options={{
+                            cardShadowEnabled: false,
+                            headerTitleStyle: { color: "#8B98B4" },
+                        }}
                     />
                 </Stack.Navigator>
             </NavigationContainer>

@@ -6,32 +6,51 @@ import {
     View,
     ImageBackground,
     Image,
-    Animated,
+    TouchableOpacity,
     SafeAreaView,
 } from "react-native";
+import { useRoute } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import { AntDesign, Ionicons } from "@expo/vector-icons";
-import product from "../assets/drawable-hdpi/product.png";
+// import product from "../assets/drawable-hdpi/product.png";
 import { LinearGradient } from "expo-linear-gradient";
 
 const Product = () => {
+    const route = useRoute();
+    const navigation = useNavigation();
+    const { titleB, image, price, description } = route.params;
     return (
         <View style={styles.container}>
             <View style={styles.header}>
-                <AntDesign name="arrowleft" size={24} color="black" />
-                <AntDesign name="hearto" size={24} color="black" />
+                <TouchableOpacity onPress={() => navigation.goBack()}>
+                    <AntDesign name="arrowleft" size={24} color="black" />
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.goBack()}>
+                    <AntDesign name="hearto" size={24} color="black" />
+                </TouchableOpacity>
             </View>
-            <View style={styles.imgContainer}>
-                <Image source={product} style={styles.img} />
+            <View style={[styles.imgContainer]}>
+                <Image
+                    source={{ uri: `${image}` }}
+                    style={[
+                        styles.img,
+                        {
+                            resizeMode: "contain",
+                            width: "100%",
+                            height: "100%",
+                        },
+                    ]}
+                />
             </View>
             <View style={styles.nameRatePriceContainer}>
                 <View style={styles.nameContainer}>
-                    <Text style={styles.pname}>Product name</Text>
+                    <Text style={styles.pname}>{titleB}</Text>
                     <View style={styles.rateContainer}>
                         <AntDesign name="staro" size={12} color="#FF5B55" />
                         <Text style={styles.rate}>4.5</Text>
                     </View>
                 </View>
-                <Text style={styles.price}>$1500</Text>
+                <Text style={styles.price}>${price.toFixed(2)}</Text>
             </View>
             <View style={styles.reviewContainer}>
                 <Text style={[styles.reviewTitle, { width: "29%" }]}>
@@ -43,10 +62,7 @@ const Product = () => {
             </View>
             <ScrollView style={{ maxHeight: "25%" }}>
                 <Text style={{ lineHeight: 26, color: "#707070" }}>
-                    Minimalist Styling Is Not About Creating A Cold, Hard, Empty
-                    White Box Of A Home. It Is About Using Simple And Natural
-                    Forms, And Taking Away Layers Without Losing The Aesthetic
-                    Appeal Of The Space.
+                    {description}
                 </Text>
             </ScrollView>
             <View style={styles.buttonContainer}>
@@ -91,7 +107,7 @@ const Product = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginHorizontal: 10,
+        paddingHorizontal: 10,
         backgroundColor: "white",
     },
     header: {
@@ -102,6 +118,7 @@ const styles = StyleSheet.create({
     imgContainer: {
         width: "100%",
         height: "40%",
+        marginBottom: 20,
     },
     img: {
         resizeMode: "cover",

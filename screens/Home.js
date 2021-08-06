@@ -7,9 +7,10 @@ import {
     ImageBackground,
     Image,
     Animated,
-    SafeAreaView,
+    TouchableOpacity,
     TextInput,
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import { Ionicons, AntDesign } from "@expo/vector-icons";
 import Card from "../components/card/productCard/Card";
 import { LinearGradient } from "expo-linear-gradient";
@@ -37,7 +38,14 @@ const Home = () => {
     const [ready, setReady] = useState(false);
     const [products, setProducts] = useState([]);
     const [categories, SetCategories] = useState([]);
-    
+    const [filterCategories, SetFilterCategories] = useState("All");
+
+    const navigation = useNavigation();
+
+    const GotoCart = () => {
+        navigation.navigate("Your Cart");
+    };
+
     useEffect(() => {
         try {
             fetch("https://fakestoreapi.com/products")
@@ -76,8 +84,8 @@ const Home = () => {
                 style={{
                     backgroundColor: "white",
                     flex: 1,
-                    borderBottomLeftRadius: 35,
-                    borderBottomRightRadius: 35,
+                    // borderBottomLeftRadius: 35,
+                    // borderBottomRightRadius: 35,
                 }}
             >
                 <View style={styles.boxWithShadow}>
@@ -94,12 +102,14 @@ const Home = () => {
                             size={24}
                             color="black"
                         />
-                        <Ionicons
-                            name="ios-cart-outline"
-                            size={24}
-                            color="black"
-                            style={{ paddingLeft: 10, paddingRight: 10 }}
-                        />
+                        <TouchableOpacity onPress={GotoCart}>
+                            <Ionicons
+                                name="ios-cart-outline"
+                                size={24}
+                                color="black"
+                                style={{ paddingLeft: 10, paddingRight: 10 }}
+                            />
+                        </TouchableOpacity>
                     </View>
                 </View>
                 <View style={{ marginHorizontal: 10 }}>
@@ -174,16 +184,55 @@ const Home = () => {
                         horizontal
                         showsHorizontalScrollIndicator={false}
                     >
-                        <View style={styles.categoriesText}>
-                            <Text>All</Text>
-                        </View>
-                        {categories.map((category) => (
-                            <View key={category} style={styles.categoriesText}>
-                                <Text style={{ textTransform: "capitalize" }}>
-                                    {category}
-                                </Text>
-                            </View>
-                        ))}
+                        {filterCategories === "All" ? (
+                            <LinearGradient
+                                colors={["#FF5B55", "#FF1161", "#FF5B55"]}
+                                start={{ x: 0, y: 1 }}
+                                end={{ x: 1, y: 0 }}
+                                style={styles.categoriesText}
+                            >
+                                <Text style={{ color: "white" }}>All</Text>
+                            </LinearGradient>
+                        ) : (
+                            <TouchableOpacity
+                                style={styles.categoriesText}
+                                onPress={() => SetFilterCategories("All")}
+                            >
+                                <Text>All</Text>
+                            </TouchableOpacity>
+                        )}
+                        {categories.map((category) => {
+                            // console.log(category);
+                            return filterCategories === category ? (
+                                <LinearGradient
+                                    colors={["#FF5B55", "#FF1161", "#FF5B55"]}
+                                    start={{ x: 0, y: 1 }}
+                                    end={{ x: 1, y: 0 }}
+                                    style={styles.categoriesText}
+                                    key={category}
+                                >
+                                    <Text style={{ color: "white" }}>
+                                        {category}
+                                    </Text>
+                                </LinearGradient>
+                            ) : (
+                                <TouchableOpacity
+                                    key={category}
+                                    style={styles.categoriesText}
+                                    onPress={() =>
+                                        SetFilterCategories(category)
+                                    }
+                                >
+                                    <Text
+                                        style={{
+                                            textTransform: "capitalize",
+                                        }}
+                                    >
+                                        {category}
+                                    </Text>
+                                </TouchableOpacity>
+                            );
+                        })}
                     </ScrollView>
                     <ScrollView
                         horizontal
