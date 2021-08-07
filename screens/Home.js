@@ -84,8 +84,8 @@ const Home = () => {
                 style={{
                     backgroundColor: "white",
                     flex: 1,
-                    // borderBottomLeftRadius: 35,
-                    // borderBottomRightRadius: 35,
+                    borderBottomLeftRadius: 30,
+                    borderBottomRightRadius: 30,
                 }}
             >
                 <View style={styles.boxWithShadow}>

@@ -87,6 +87,30 @@ const Product = (props) => {
                 <Text style={{ width: "23%" }}>Offers</Text>
                 <Text style={{ width: "23%" }}>Policy</Text>
             </View>
+            <View
+                style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                    marginBottom: 10,
+                }}
+            >
+                <View
+                    style={{
+                        width: "25%",
+                        borderWidth: 1.5,
+                        borderColor: "#FF5B55",
+                    }}
+                ></View>
+                <View
+                    style={{
+                        width: "71%",
+                        borderWidth: 0.5,
+                        opacity: 0.1,
+                        borderColor: "#707070",
+                    }}
+                ></View>
+            </View>
+
             <ScrollView style={{ maxHeight: "25%" }}>
                 <Text style={{ lineHeight: 26, color: "#707070" }}>
                     {description}
@@ -198,11 +222,11 @@ const styles = StyleSheet.create({
         marginVertical: 10,
     },
     reviewTitle: {
-        paddingRight: 10,
+        marginRight: 10,
         color: "#FF5B55",
-        borderBottomWidth: 2,
-        borderColor: "#FF5B55",
-        paddingBottom: 10,
+        // borderBottomWidth: 2,
+        // borderColor: "#FF5B55",
+        // paddingBottom: 10,
     },
     buttonContainer: {
         flex: 1,

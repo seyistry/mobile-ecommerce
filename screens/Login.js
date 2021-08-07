@@ -9,7 +9,7 @@ import {
     Animated,
     SafeAreaView,
 } from "react-native";
-import bg from "../assets/bg.png";
+import bg from "../assets/drawable-hdpi/Splash.png";
 // import logo from "../assets/logo.png";
 import logo from "../assets/drawable-hdpi/loginLogo.png";
 import FormInput from "../components/input/FormInput";
@@ -59,8 +59,7 @@ const styles = StyleSheet.create({
         height: "100%",
         backgroundColor: "white",
         alignItems: "center",
-        borderTopRightRadius: 20,
-        borderTopLeftRadius: 20,
+        borderRadius: 30,
         paddingHorizontal: 10,
     },
     text: {

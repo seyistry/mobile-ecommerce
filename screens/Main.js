@@ -21,6 +21,7 @@ import Login from "./Login";
 import Cart from "./Cart";
 import Checkouts from "./Checkouts";
 import OrderSuccessMsg from "./OrderSuccessMsg";
+import Profile from "./Profile";
 
 const Main = () => {
     const Tab = createBottomTabNavigator();
@@ -116,7 +117,7 @@ const Main = () => {
                 >
                     <Tab.Screen name="Box" component={Login} />
                     <Tab.Screen name="Home" component={Home} />
-                    <Tab.Screen name="Profile" component={Cart} />
+                    <Tab.Screen name="Profile" component={Profile} />
                 </Tab.Navigator>
             </LinearGradient>
         );

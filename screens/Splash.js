@@ -7,7 +7,7 @@ import {
     Image,
     Animated,
 } from "react-native";
-import bg from "../assets/bg.png";
+import bg from "../assets/drawable-hdpi/Splash.png";
 // import logo from "../assets/logo.png";
 import logo from "../assets/drawable-hdpi/logo.png";
 import Button from "../components/button/pryButton/Button";
