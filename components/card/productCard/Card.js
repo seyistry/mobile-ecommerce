@@ -17,7 +17,6 @@ const Card = (props) => {
     const GotoProduct = () => {
         navigation.navigate("Product", {
             id,
-            title,
             image,
             price,
             titleAbbr,

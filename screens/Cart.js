@@ -20,27 +20,55 @@ const Product = (props) => {
     // const  [total, setTotal ] = useState(0);
     return (
         <View style={styles.container}>
-            <ScrollView showsVerticalScrollIndicator={true}>
-                {props.itemsIds.map((id) => {
-                    return <Card key={id} {...props.items[id]} />;
-                })}
-            </ScrollView>
-            <View style={{ alignItems: "center" }}>
-                <Text style={{ fontSize: 17, color: "#8B98B4", marginTop: 10 }}>
-                    TOTAL AMOUNT
-                </Text>
-                <Text style={{ fontSize: 26, marginTop: 5 }}>${props.total.toFixed(2)}</Text>
-                <LinearGradient
-                    // Button Linear Gradient
-                    colors={["#FF5B55", "#FF5B55", "#FF1161"]}
-                    start={{ x: 0, y: 0 }}
-                    end={{ x: 1, y: 1 }}
-                    style={styles.buttonContainer}
+            {Object.keys(props.items).length < 1 ? (
+                <View
+                    style={[
+                        styles.container,
+                        {
+                            justifyContent: "center",
+                            alignItems: "center",
+                        },
+                    ]}
                 >
-                    <Text style={styles.text}>CHECKOUT</Text>
-                    <AntDesign name="arrowright" size={24} color="white" />
-                </LinearGradient>
-            </View>
+                    <Text style={{ fontSize: 25 }}>Cart Empty!</Text>
+                </View>
+            ) : (
+                <View style={styles.container}>
+                    <ScrollView showsVerticalScrollIndicator={true}>
+                        {props.itemsIds.map((id) => {
+                            return <Card key={id} {...props.items[id]} />;
+                        })}
+                    </ScrollView>
+                    <View style={{ alignItems: "center" }}>
+                        <Text
+                            style={{
+                                fontSize: 17,
+                                color: "#8B98B4",
+                                marginTop: 10,
+                            }}
+                        >
+                            TOTAL AMOUNT
+                        </Text>
+                        <Text style={{ fontSize: 26, marginTop: 5 }}>
+                            ${props.total.toFixed(2)}
+                        </Text>
+                        <LinearGradient
+                            // Button Linear Gradient
+                            colors={["#FF5B55", "#FF5B55", "#FF1161"]}
+                            start={{ x: 0, y: 0 }}
+                            end={{ x: 1, y: 1 }}
+                            style={styles.buttonContainer}
+                        >
+                            <Text style={styles.text}>CHECKOUT</Text>
+                            <AntDesign
+                                name="arrowright"
+                                size={24}
+                                color="white"
+                            />
+                        </LinearGradient>
+                    </View>
+                </View>
+            )}
         </View>
     );
 };
@@ -51,13 +79,9 @@ function mapStateToProps(state) {
         (a, b) => items[a].timestamp - items[b].timestamp
     );
 
-    let addItems = itemsIds.map(
-        (id) => items[id].price * items[id].quantity
-    );
+    let addItems = itemsIds.map((id) => items[id].price * items[id].quantity);
 
-    let total = addItems.reduce((a, b) => a + b, 0)
-
-    console.log(total)
+    let total = addItems.reduce((a, b) => a + b, 0);
     return {
         items,
         itemsIds,

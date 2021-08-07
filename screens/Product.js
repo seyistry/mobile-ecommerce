@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
     StyleSheet,
     Text,
@@ -8,17 +8,44 @@ import {
     Image,
     TouchableOpacity,
     SafeAreaView,
+    Touchable,
 } from "react-native";
+import { connect } from "react-redux";
 import { useRoute } from "@react-navigation/native";
 import { useNavigation } from "@react-navigation/native";
 import { AntDesign, Ionicons } from "@expo/vector-icons";
 // import product from "../assets/drawable-hdpi/product.png";
 import { LinearGradient } from "expo-linear-gradient";
+import { addToCart } from "../actions/index";
 
-const Product = () => {
+const Product = (props) => {
+    const [quantity, setSetQuantity] = useState(1);
     const route = useRoute();
     const navigation = useNavigation();
-    const { titleB, image, price, description } = route.params;
+    const { id, titleAbbr, image, price, description } = route.params;
+
+    const quantityIncrement = () => {
+        setSetQuantity(quantity + 1);
+    };
+    const quantityDecrement = () => {
+        setSetQuantity(quantity < 2 ? 1 : quantity - 1);
+    };
+
+    const handleAddToCart = () => {
+        const timestamp = Date.now();
+        props.dispatch(
+            addToCart({
+                id,
+                title: titleAbbr,
+                image,
+                price: price.toFixed(2),
+                timestamp,
+                quantity,
+            })
+        );
+        navigation.navigate("Home");
+    };
+
     return (
         <View style={styles.container}>
             <View style={styles.header}>
@@ -44,7 +71,7 @@ const Product = () => {
             </View>
             <View style={styles.nameRatePriceContainer}>
                 <View style={styles.nameContainer}>
-                    <Text style={styles.pname}>{titleB}</Text>
+                    <Text style={styles.pname}>{titleAbbr}</Text>
                     <View style={styles.rateContainer}>
                         <AntDesign name="staro" size={12} color="#FF5B55" />
                         <Text style={styles.rate}>4.5</Text>
@@ -78,27 +105,41 @@ const Product = () => {
                         },
                     ]}
                 >
-                    <AntDesign name="minuscircleo" size={24} color="white" />
+                    <TouchableOpacity onPress={quantityDecrement}>
+                        <AntDesign
+                            name="minuscircleo"
+                            size={24}
+                            color="white"
+                        />
+                    </TouchableOpacity>
                     <Text style={{ paddingHorizontal: 20, color: "white" }}>
-                        1
+                        {quantity}
                     </Text>
-                    <AntDesign name="pluscircleo" size={24} color="white" />
+                    <TouchableOpacity onPress={quantityIncrement}>
+                        <AntDesign name="pluscircleo" size={24} color="white" />
+                    </TouchableOpacity>
                 </LinearGradient>
-                <LinearGradient
-                    colors={["#FF5B55", "#FF5B55", "#FF1161"]}
-                    start={{ x: 0, y: 0 }}
-                    end={{ x: 1, y: 1 }}
-                    style={[
-                        styles.button,
-                        {
-                            width: 194,
-                            height: 58,
-                        },
-                    ]}
-                >
-                    <Text style={{ color: "white" }}>Add to cart</Text>
-                    <Ionicons name="ios-cart-outline" size={24} color="white" />
-                </LinearGradient>
+                <TouchableOpacity onPress={handleAddToCart}>
+                    <LinearGradient
+                        colors={["#FF5B55", "#FF5B55", "#FF1161"]}
+                        start={{ x: 0, y: 0 }}
+                        end={{ x: 1, y: 1 }}
+                        style={[
+                            styles.button,
+                            {
+                                width: 194,
+                                height: 58,
+                            },
+                        ]}
+                    >
+                        <Text style={{ color: "white" }}>Add to cart</Text>
+                        <Ionicons
+                            name="ios-cart-outline"
+                            size={24}
+                            color="white"
+                        />
+                    </LinearGradient>
+                </TouchableOpacity>
             </View>
         </View>
     );
@@ -177,4 +218,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Product;
+export default connect()(Product);
