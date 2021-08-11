@@ -42,6 +42,10 @@ const Home = () => {
 
     const navigation = useNavigation();
 
+    const toggleMenu = () => {
+        navigation.openDrawer();
+    };
+
     const GotoCart = () => {
         navigation.navigate("Your Cart");
     };
@@ -89,19 +93,24 @@ const Home = () => {
                 }}
             >
                 <View style={styles.boxWithShadow}>
-                    <View style={{ paddingLeft: 10 }}>
+                    <TouchableOpacity
+                        style={{ paddingLeft: 10 }}
+                        onPress={toggleMenu}
+                    >
                         <Ionicons
                             name="ios-menu-outline"
                             size={24}
                             color="black"
                         />
-                    </View>
+                    </TouchableOpacity>
                     <View style={{ flexDirection: "row" }}>
-                        <Ionicons
-                            name="notifications-outline"
-                            size={24}
-                            color="black"
-                        />
+                        <TouchableOpacity>
+                            <Ionicons
+                                name="notifications-outline"
+                                size={24}
+                                color="black"
+                            />
+                        </TouchableOpacity>
                         <TouchableOpacity onPress={GotoCart}>
                             <Ionicons
                                 name="ios-cart-outline"
