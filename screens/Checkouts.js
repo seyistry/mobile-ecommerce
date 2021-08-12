@@ -10,16 +10,19 @@ import {
     SafeAreaView,
     TouchableOpacity,
 } from "react-native";
+import { connect } from "react-redux";
 import { useRoute, useNavigation } from "@react-navigation/native";
 import { AntDesign, Ionicons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import FormInput from "../components/input/FormInput.js";
+import { resetCart } from "../actions/index.js";
 
-const Checkout = () => {
+const Checkout = (props) => {
     const route = useRoute();
     const navigation = useNavigation();
 
     const GotoSuccess = () => {
+        props.dispatch(resetCart());
         navigation.navigate("OrderSuccessMsg");
     };
 
@@ -128,4 +131,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Checkout;
+export default connect()(Checkout);
