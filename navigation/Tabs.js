@@ -6,6 +6,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import Home from "../screens/Home";
 import Login from "../screens/Login";
 import Profile from "../screens/Profile";
+import UpcomingOrder from "../screens/UpcomingOrder";
 
 const Tab = createBottomTabNavigator();
 
@@ -98,7 +99,7 @@ function Tabs() {
                 }
                 initialRouteName="Home"
             >
-                <Tab.Screen name="Box" component={Login} />
+                <Tab.Screen name="Box" component={UpcomingOrder} />
                 <Tab.Screen name="Home" component={Home} />
                 <Tab.Screen name="Profile" component={Profile} />
             </Tab.Navigator>
