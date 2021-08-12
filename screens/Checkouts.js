@@ -8,12 +8,22 @@ import {
     Image,
     Animated,
     SafeAreaView,
+    TouchableOpacity,
 } from "react-native";
+import { useRoute, useNavigation } from "@react-navigation/native";
 import { AntDesign, Ionicons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import FormInput from "../components/input/FormInput.js";
 
 const Checkout = () => {
+    const route = useRoute();
+    const navigation = useNavigation();
+
+    const GotoSuccess = () => {
+        navigation.navigate("OrderSuccessMsg");
+    };
+
+    const { total } = route.params;
     return (
         <ScrollView style={{ flex: 1, backgroundColor: "white", padding: 10 }}>
             <Text style={styles.title}>Shipping Address</Text>
@@ -67,19 +77,21 @@ const Checkout = () => {
                     </Text>
                     <View style={{ alignItems: "center" }}>
                         <Text style={{ fontSize: 20, paddingTop: 5 }}>
-                            $1700.00
+                            {total}
                         </Text>
                     </View>
                 </View>
-                <LinearGradient
-                    colors={["#FF5B55", "#FF5B55", "#FF1161"]}
-                    start={{ x: 0, y: 0 }}
-                    end={{ x: 1, y: 1 }}
-                    style={styles.buttonContainer}
-                >
-                    <Text style={styles.orderText}>Place order</Text>
-                    <AntDesign name="arrowright" size={24} color="white" />
-                </LinearGradient>
+                <TouchableOpacity onPress={GotoSuccess}>
+                    <LinearGradient
+                        colors={["#FF5B55", "#FF5B55", "#FF1161"]}
+                        start={{ x: 0, y: 0 }}
+                        end={{ x: 1, y: 1 }}
+                        style={styles.buttonContainer}
+                    >
+                        <Text style={styles.orderText}>Place order</Text>
+                        <AntDesign name="arrowright" size={24} color="white" />
+                    </LinearGradient>
+                </TouchableOpacity>
             </View>
         </ScrollView>
     );

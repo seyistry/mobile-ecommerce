@@ -32,6 +32,23 @@ function Stacks() {
                     headerTitleStyle: { color: "#8B98B4" },
                 }}
             />
+            <Stack.Screen
+                name="Checkouts"
+                component={Checkouts}
+                options={{
+                    cardShadowEnabled: false,
+                    headerTitleStyle: { color: "#8B98B4" },
+                }}
+            />
+            <Stack.Screen
+                name="OrderSuccessMsg"
+                component={OrderSuccessMsg}
+                options={{
+                    cardShadowEnabled: false,
+                    headerTitleStyle: { color: "#8B98B4" },
+                    headerShown: false,
+                }}
+            />
         </Stack.Navigator>
     );
 }

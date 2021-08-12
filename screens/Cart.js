@@ -4,20 +4,21 @@ import {
     Text,
     ScrollView,
     View,
-    ImageBackground,
-    Image,
-    Animated,
-    SafeAreaView,
+    TouchableOpacity,
 } from "react-native";
 import { connect } from "react-redux";
 import { AntDesign, Ionicons } from "@expo/vector-icons";
-import product from "../assets/drawable-hdpi/product.png";
+import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
 import Card from "../components/card/cartCard/Card.js";
-import Button from "../components/button/secButton/Button";
 
 const Product = (props) => {
-    // const  [total, setTotal ] = useState(0);
+    const navigation = useNavigation();
+
+    const GotoCheckouts = () => {
+        navigation.navigate("Checkouts", { total: props.total.toFixed(2) });
+    };
+
     return (
         <View style={styles.container}>
             {Object.keys(props.items).length < 1 ? (
@@ -52,20 +53,22 @@ const Product = (props) => {
                         <Text style={{ fontSize: 26, marginTop: 5 }}>
                             ${props.total.toFixed(2)}
                         </Text>
-                        <LinearGradient
-                            // Button Linear Gradient
-                            colors={["#FF5B55", "#FF5B55", "#FF1161"]}
-                            start={{ x: 0, y: 0 }}
-                            end={{ x: 1, y: 1 }}
-                            style={styles.buttonContainer}
-                        >
-                            <Text style={styles.text}>CHECKOUT</Text>
-                            <AntDesign
-                                name="arrowright"
-                                size={24}
-                                color="white"
-                            />
-                        </LinearGradient>
+                        <TouchableOpacity onPress={GotoCheckouts}>
+                            <LinearGradient
+                                // Button Linear Gradient
+                                colors={["#FF5B55", "#FF5B55", "#FF1161"]}
+                                start={{ x: 0, y: 0 }}
+                                end={{ x: 1, y: 1 }}
+                                style={styles.buttonContainer}
+                            >
+                                <Text style={styles.text}>CHECKOUT</Text>
+                                <AntDesign
+                                    name="arrowright"
+                                    size={24}
+                                    color="white"
+                                />
+                            </LinearGradient>
+                        </TouchableOpacity>
                     </View>
                 </View>
             )}

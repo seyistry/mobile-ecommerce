@@ -8,13 +8,18 @@ import {
     Image,
     Animated,
     SafeAreaView,
+    TouchableOpacity,
 } from "react-native";
-import { AntDesign, Ionicons } from "@expo/vector-icons";
-import product from "../assets/drawable-hdpi/product.png";
+import { useNavigation } from "@react-navigation/native";
 import Button from "../components/button/secButton/Button";
 import successLogo from "../assets/drawable-hdpi/successLogo.png";
+import Home from "./Home";
 
 const OrderSuccessMsg = () => {
+    const navigation = useNavigation();
+    const GotoHome = () => {
+        navigation.navigate("Home");
+    };
     return (
         <View style={styles.container}>
             <View style={styles.img}>
@@ -30,14 +35,16 @@ const OrderSuccessMsg = () => {
                 </Text>
                 <Text style={styles.textB}>it’s way to being processed</Text>
             </View>
-            <View style={styles.containerButton}>
-                <Button name="Track Order" />
-            </View>
-            <View>
+            <TouchableOpacity>
+                <View style={styles.containerButton}>
+                    <Button name="Track Order" />
+                </View>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={GotoHome}>
                 <Text style={[styles.textC, styles.containerTextB]}>
                     Back to home
                 </Text>
-            </View>
+            </TouchableOpacity>
         </View>
     );
 };
@@ -47,7 +54,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: "white",
         alignItems: "center",
-        justifyContent: 'center'
+        justifyContent: "center",
     },
     img: {
         paddingRight: 30,
@@ -68,7 +75,7 @@ const styles = StyleSheet.create({
     textC: {
         fontSize: 17,
         color: "#FF5B55",
-        textTransform: 'uppercase',
+        textTransform: "uppercase",
     },
     containerTextB: {
         marginTop: 20,

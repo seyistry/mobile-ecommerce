@@ -11,8 +11,7 @@ import {
     Touchable,
 } from "react-native";
 import { connect } from "react-redux";
-import { useRoute } from "@react-navigation/native";
-import { useNavigation } from "@react-navigation/native";
+import { useRoute, useNavigation } from "@react-navigation/native";
 import { AntDesign, Ionicons } from "@expo/vector-icons";
 // import product from "../assets/drawable-hdpi/product.png";
 import { LinearGradient } from "expo-linear-gradient";
