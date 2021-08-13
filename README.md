@@ -26,7 +26,7 @@ This will open Expo Developer Tools in the browser.  You can then do one of the 
 
 - Use your device to test:
 
-    Scan the QR Code [here](https://expo.io/@seyistry/mobile-ecommerce) using the Expo Client app to ([Expo Client for Android & iOS](https://expo.dev/tools#client))
+    Scan the QR Code [here](https://expo.io/@seyistry/mobile-ecommerce) using the Expo Client app ([Expo Client for Android & iOS](https://expo.dev/tools#client))
 ```
   
 ## Author - [@seyi Egunjobi](https://github.com/seyistry/)
